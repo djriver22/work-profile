@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Professional portfolio for David River.">
+    <title>David River — Delivery and Agile Leadership</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --ink: #e8f2ff;
+        --muted: #abc4e1;
+        --quiet: #79a9dc;
+        --line: rgba(145, 190, 245, .22);
+        --accent: #84c4ff;
+        --navy: #071326;
+        --cobalt: #0e2b57;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: #050c18;
+        color: var(--ink);
+        font-family: Montserrat, Arial, sans-serif;
+      }
+
+      .site-shell {
+        display: grid;
+        grid-template-columns: 270px minmax(0, 1fr);
+        min-height: 100vh;
+        max-width: 1440px;
+        margin: 0 auto;
+        background: var(--navy);
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: linear-gradient(165deg, var(--cobalt), #071a36 61%, #061122);
+        border-right: 1px solid var(--line);
+      }
+      .sidebar::after {
+        content: "";
+        position: absolute;
+        width: 520px;
+        height: 520px;
+        bottom: -300px;
+        left: -250px;
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(28, 103, 211, .23), transparent 64%);
+      }
+      .monogram {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid #78b6ff;
+        color: #b8d8ff;
+        font-family: Play, sans-serif;
+        font-size: 14px;
+        letter-spacing: .08em;
+      }
+      .name { margin-top: 21px; font-family: Play, sans-serif; font-size: 21px; }
+      .role { max-width: 180px; margin: 8px 0 0; color: #a6c3e7; font-size: 11px; line-height: 1.65; }
+      nav { display: grid; gap: 16px; margin-top: 75px; }
+      nav a { color: #aac8ea; font-size: 11px; text-decoration: none; }
+      nav a:hover, nav a:focus { color: #fff; }
+      nav a:first-child { color: #fff; }
+      nav a:first-child::before { content: ""; display: inline-block; width: 16px; height: 1px; margin: 0 8px 3px 0; background: var(--accent); }
+      .availability { position: relative; z-index: 1; border-top: 1px solid var(--line); padding-top: 17px; color: #a8c8ec; font-size: 10px; line-height: 1.8; }
+      .availability strong { color: #eef7ff; font-weight: 500; }
+
+      main { padding: 44px clamp(28px, 6vw, 96px) 76px; background: linear-gradient(120deg, #091a33, #071427 68%, #061223); }
+      section { scroll-margin-top: 35px; }
+      .eyebrow { color: var(--quiet); font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
+      .topline { display: flex; align-items: center; justify-content: space-between; color: #a8c3e3; font-size: 10px; }
+      .status-dot { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: #79d8b3; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1, h2, h3 { font-family: Play, sans-serif; font-weight: 400; }
+      h1 { max-width: 720px; margin: 94px 0 25px; font-size: clamp(43px, 6vw, 76px); line-height: .98; letter-spacing: -.048em; }
+      .intro { max-width: 600px; color: #bfd0e6; font-size: 14px; line-height: 1.75; }
+
+      /* Change text and related outcomes in the capabilityData object below. */
+      .capabilities { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 54px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .capability {
+        min-height: 116px;
+        padding: 19px 16px 17px 0;
+        margin-right: 16px;
+        border: 0;
+        border-right: 1px solid rgba(145, 190, 245, .18);
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        font: inherit;
+        text-align: left;
+      }
+      .capability:last-child { border-right: 0; }
+      .capability .number { display: block; margin-bottom: 8px; color: #649bd2; font-size: 9px; letter-spacing: .16em; }
+      .capability strong { font-family: Play, sans-serif; font-size: 16px; font-weight: 400; }
+      .capability:hover strong, .capability:focus strong, .capability.active strong { color: var(--accent); }
+      .capability.active { box-shadow: inset 0 -2px var(--accent); }
+
+      .journey { position: relative; display: grid; grid-template-columns: minmax(200px, .8fr) minmax(300px, 1.2fr); gap: clamp(28px, 6vw, 90px); margin-top: 44px; }
+      .journey::before { content: ""; position: absolute; top: 32px; left: 34%; width: 14%; border-top: 1px dashed #5e9edc; transform: rotate(8deg); }
+      .journey h2 { margin: 7px 0 9px; font-size: 25px; line-height: 1.08; }
+      .journey-copy { max-width: 280px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+      .outcome { min-height: 150px; padding: 22px; border: 1px solid rgba(125, 184, 255, .3); background: rgba(20, 59, 105, .42); }
+      .outcome h3 { margin: 6px 0 8px; color: #e8f4ff; font-size: 21px; }
+      .outcome p { margin: 0; color: #b9d2eb; font-size: 11px; line-height: 1.7; }
+      .arrow { float: right; color: var(--accent); font-size: 23px; line-height: 10px; }
+
+      .principle { display: grid; grid-template-columns: 1fr 180px; gap: 32px; margin-top: 44px; padding-top: 17px; border-top: 1px solid rgba(145, 190, 245, .16); }
+      .principle blockquote { max-width: 500px; margin: 7px 0 0; color: #d8eafe; font-family: Play, sans-serif; font-size: 19px; line-height: 1.35; }
+      .principle blockquote::before { content: "“"; margin-right: 4px; color: #6eb7ff; font-size: 31px; line-height: 8px; vertical-align: -9px; }
+      .principle p { margin: 0; color: #89acd1; font-size: 10px; line-height: 1.6; text-align: right; }
+
+      .experience { margin-top: 112px; padding-top: 20px; border-top: 1px solid var(--line); }
+      .experience h2 { margin: 8px 0 36px; font-size: 34px; }
+      .experience-item { display: grid; grid-template-columns: 150px 1fr; gap: 25px; padding: 21px 0; border-top: 1px solid rgba(145, 190, 245, .16); }
+      .experience-item time { color: #7da8d4; font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
+      .experience-item h3 { margin-bottom: 7px; font-size: 19px; }
+      .experience-item p { max-width: 600px; margin-bottom: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+      .footer { margin-top: 100px; padding-top: 22px; border-top: 1px solid var(--line); color: #a9c6e6; font-size: 11px; }
+      .footer a { color: #e8f4ff; }
+
+      @media (max-width: 820px) {
+        .site-shell { grid-template-columns: 1fr; }
+        .sidebar { position: relative; height: auto; min-height: 240px; padding: 30px 28px; }
+        nav { display: none; }
+        main { padding: 30px 28px 62px; }
+        h1 { margin-top: 60px; }
+        .capabilities { grid-template-columns: repeat(2, 1fr); }
+        .capability:nth-child(2) { border-right: 0; }
+        .journey { grid-template-columns: 1fr; gap: 20px; }
+        .journey::before { display: none; }
+      }
+      @media (max-width: 480px) {
+        .capabilities { grid-template-columns: 1fr; }
+        .capability { min-height: 84px; margin: 0; border-right: 0; border-bottom: 1px solid rgba(145, 190, 245, .16); }
+        .principle, .experience-item { grid-template-columns: 1fr; gap: 12px; }
+        .principle p { text-align: left; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar">
+        <div>
+          <div class="monogram">DR</div>
+          <div class="name">David River</div>
+          <p class="role">Delivery leadership, Scrum practice &amp; organisational momentum</p>
+          <nav aria-label="Primary navigation">
+            <a href="#profile">Profile</a>
+            <a href="#approach">Approach</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Connect</a>
+          </nav>
+        </div>
+        <div class="availability">
+          <div class="eyebrow">Currently</div>
+          <strong>Open to the right conversation</strong><br>
+          Brighton, United Kingdom · Hybrid / Remote
+        </div>
+      </aside>
+
+      <main>
+        <section id="profile">
+          <div class="topline">
+            <span class="eyebrow">Delivery and agile leadership</span>
+            <span><i class="status-dot"></i>Available</span>
+          </div>
+          <h1>Creating the conditions for teams to do their best work.</h1>
+          <p class="intro">I am an agile delivery leader with more than four years’ experience helping software teams create delivery clarity. I connect people, priorities and practical ways of working so progress is visible, risks surface earlier and teams can move with confidence.</p>
+        </section>
+
+        <section id="approach" aria-label="Capabilities and relevance">
+          <div class="capabilities">
+            <button class="capability active" type="button" data-capability="agile"><span class="number">01 / CAPABILITY</span><strong>Scrum practice</strong></button>
+            <button class="capability" type="button" data-capability="alignment"><span class="number">02 / CAPABILITY</span><strong>Cross-team alignment</strong></button>
+            <button class="capability" type="button" data-capability="operations"><span class="number">03 / CAPABILITY</span><strong>Delivery visibility</strong></button>
+            <button class="capability" type="button" data-capability="delivery"><span class="number">04 / CAPABILITY</span><strong>Efficient delivery</strong></button>
+          </div>
+
+          <div class="journey">
+            <div>
+              <div class="eyebrow">Why it matters</div>
+              <h2 id="journey-heading">Scrum practice, with intent.</h2>
+              <p class="journey-copy" id="journey-copy">Scrum is useful when it creates focus, feedback and forward movement—not when it becomes a process for its own sake.</p>
+            </div>
+            <div class="outcome">
+              <div class="eyebrow">The relevance <span class="arrow">↗</span></div>
+              <h3 id="outcome-heading">Teams can respond with confidence.</h3>
+              <p id="outcome-copy">Shared cadence and visible priorities make dependencies easier to manage, risks easier to see and decisions easier to make.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="principle">
+          <div>
+            <div class="eyebrow">A working principle</div>
+            <blockquote>Good delivery makes the next right action clearer.</blockquote>
+          </div>
+          <p>A calm structure for complex, cross-functional work.</p>
+        </section>
+
+        <section class="experience" id="experience">
+          <div class="eyebrow">Selected experience</div>
+          <h2>Work that connects the dots.</h2>
+          <article class="experience-item">
+            <time>Apr 2026 — Present</time>
+            <div><h3>Senior Scrum Master and Delivery Manager · MPB</h3><p>Build and run daily reporting across squads using work in progress and code-review time to make delivery progress and risk visible. Produce flow metrics and run Monte Carlo forecasting experiments; maintain dependency, risk and issue logs through Scrum of Scrums; and automate reporting from meeting transcripts and Monday.com boards into the right Slack channels.</p></div>
+          </article>
+          <article class="experience-item">
+            <time>Jul 2024 — Apr 2026</time>
+            <div><h3>Scrum Master and Delivery Manager · MPB</h3><p>Owned flow-metric reporting, facilitation and process management for two squads. Led release planning, dependency management and stakeholder communication, while supporting impediment resolution and cross-team coordination through Scrum of Scrums.</p></div>
+          </article>
+          <article class="experience-item">
+            <time>Jun 2022 — Jul 2024</time>
+            <div><h3>Scrum Master · Bidlogix</h3><p>Moved a team from arbitrary estimates to statistics-based forecasting to improve delivery predictability. Owned Jira and team process, used delivery data to inform change proposals, and facilitated planning, release planning and client meetings while building psychological safety and developer autonomy.</p></div>
+          </article>
+          <article class="experience-item">
+            <time>Oct 2017 — Jun 2022</time>
+            <div><h3>SaaS Software Trainer and Support Lead · Bidlogix</h3><p>Supported global SaaS clients through email, video and API queries, and shared fortnightly support reviews to identify trends for the product team. Designed interactive client training and developed HTML, CSS and JavaScript skills to solve customer problems creatively.</p></div>
+          </article>
+        </section>
+
+        <footer class="footer" id="contact">
+          <div class="eyebrow">Connect</div>
+          <p><a href="mailto:davidjriver22@gmail.com">davidjriver22@gmail.com</a> · LinkedIn available on request</p>
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      const capabilityData = {
+        agile: {
+          journeyTitle: "Scrum practice, with intent.",
+          journeyCopy: "Scrum is useful when it creates focus, feedback and forward movement—not when it becomes a process for its own sake.",
+          outcomeTitle: "Teams can respond with confidence.",
+          outcomeCopy: "Shared cadence and visible priorities make dependencies easier to manage, risks easier to see and decisions easier to make."
+        },
+        alignment: {
+          journeyTitle: "Cross-team alignment, made practical.",
+          journeyCopy: "Bring squads together through clear release planning, shared priorities and active dependency management.",
+          outcomeTitle: "Teams move together, not in parallel.",
+          outcomeCopy: "Scrum of Scrums creates a regular space to surface dependencies, resolve impediments and translate delivery information into useful stakeholder updates."
+        },
+        operations: {
+          journeyTitle: "Delivery visibility that supports action.",
+          journeyCopy: "Use practical flow measures—work in progress, throughput, cycle time, code-review duration and burn-up—to understand the work as it moves.",
+          outcomeTitle: "Risks appear earlier.",
+          outcomeCopy: "Evidence-based reporting and probabilistic forecasting give teams and stakeholders a clearer view of progress, constraints and likely delivery dates."
+        },
+        delivery: {
+          journeyTitle: "Efficient delivery, without cutting corners.",
+          journeyCopy: "Make work visible, reduce unnecessary hand-offs and automate the reporting that takes time away from valuable progress.",
+          outcomeTitle: "Progress becomes easier to sustain.",
+          outcomeCopy: "Simple, reliable delivery practices and well-configured tooling create momentum while preserving the space to think, learn and adapt."
+        }
+      };
+
+      const capabilityButtons = document.querySelectorAll(".capability");
+      const journeyHeading = document.querySelector("#journey-heading");
+      const journeyCopy = document.querySelector("#journey-copy");
+      const outcomeHeading = document.querySelector("#outcome-heading");
+      const outcomeCopy = document.querySelector("#outcome-copy");
+
+      capabilityButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const content = capabilityData[button.dataset.capability];
+          capabilityButtons.forEach((item) => item.classList.remove("active"));
+          button.classList.add("active");
+          journeyHeading.textContent = content.journeyTitle;
+          journeyCopy.textContent = content.journeyCopy;
+          outcomeHeading.textContent = content.outcomeTitle;
+          outcomeCopy.textContent = content.outcomeCopy;
+        });
+      });
+    </script>
+  </body>
+</html>
